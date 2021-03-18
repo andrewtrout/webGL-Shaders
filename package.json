@@ -16,5 +16,11 @@
   "bugs": {
     "url": "https://github.com/andrewtrout/webGL-Shaders/issues"
   },
-  "homepage": "https://github.com/andrewtrout/webGL-Shaders#readme"
+  "homepage": "https://github.com/andrewtrout/webGL-Shaders#readme",
+  "dependencies": {
+    "three": "^0.126.1"
+  },
+  "devDependencies": {
+    "sass": "^1.32.8"
+  }
 }
