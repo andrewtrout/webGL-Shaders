@@ -36439,21 +36439,37 @@ var Sketch = /*#__PURE__*/function () {
     this.renderer = new THREE.WebGLRenderer({
       antialias: true
     });
-    this.renderer.setSize(this.width, this.height);
     this.container.appendChild(this.renderer.domElement);
     this.controls = new _OrbitControls.OrbitControls(this.camera, this.renderer.domElement);
+    this.resize();
+    this.setupResize();
     this.addObjects();
     this.render();
   }
 
   _createClass(Sketch, [{
+    key: "setupResize",
+    value: function setupResize() {
+      window.addEventListener('resize', this.resize.bind(this));
+    }
+  }, {
     key: "resize",
-    value: function resize() {}
+    value: function resize() {
+      this.width = this.container.offsetWidth;
+      this.height = this.container.offsetHeight;
+      this.renderer.setSize(this.width, this.height);
+      this.camera.aspect = this.width / this.height;
+      this.camera.updateProjectionMatrix();
+    }
   }, {
     key: "addObjects",
     value: function addObjects() {
-      this.geometry = new THREE.BoxGeometry(0.2, 0.2, 0.2);
-      this.material = new THREE.MeshNormalMaterial();
+      this.geometry = new THREE.BoxGeometry(0.6, 0.6, 0.6); // this.material = new THREE.MeshNormalMaterial();
+
+      this.material = new THREE.ShaderMaterial({
+        fragmentShader: "\n\t\t\t\tvarying vec2 vUv;\n\t\t\t\tvoid main()\t{\n\t\t\t\t\t// vec2 newUV = (vUv - vec2(0.5))*resolution.zw + vec2(0.5);\n\t\t\t\t\tgl_FragColor = vec4(vUv,0.0,1.);\n\t\t\t\t}\n\t\t\t\t",
+        vertexShader: "\n\t\t\t\tvarying vec2 vUv;\n\t\t\t\tvoid main() {\n\t\t\t\t\tvUv = uv;\n\t\t\t\t\tgl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );\n\t\t\t\t}\n\t\t\t\t"
+      });
       this.mesh = new THREE.Mesh(this.geometry, this.material);
       this.scene.add(this.mesh);
     }
