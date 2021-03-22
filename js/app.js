@@ -1,6 +1,8 @@
 import '/style.scss';
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
+import fragment from './shader/fragment.glsl';
+import vertex from './shader/vertex.glsl';
 
 export default class Sketch{
 	constructor(options){
@@ -40,23 +42,16 @@ export default class Sketch{
 
 	addObjects(){
 
-		this.geometry = new THREE.BoxGeometry( 0.6, 0.6, 0.6 );
+		this.geometry = new THREE.PlaneBufferGeometry( 4, 4, 100, 100 );
 		// this.material = new THREE.MeshNormalMaterial();
 		this.material = new THREE.ShaderMaterial({
-			fragmentShader: `
-				varying vec2 vUv;
-				void main()	{
-					// vec2 newUV = (vUv - vec2(0.5))*resolution.zw + vec2(0.5);
-					gl_FragColor = vec4(vUv,0.0,1.);
-				}
-				`,
-			vertexShader: `
-				varying vec2 vUv;
-				void main() {
-					vUv = uv;
-					gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );
-				}
-				`,
+			uniforms: {
+				time: {value:0}
+			},
+			side: THREE.DoubleSide,
+			fragmentShader: fragment,
+			vertexShader: vertex,
+			// wireframe: true,
 		})
 	
 		this.mesh = new THREE.Mesh( this.geometry, this.material );
@@ -67,6 +62,8 @@ export default class Sketch{
 		this.time+= 0.05;
 		this.mesh.rotation.x = this.time / 2000;
 		this.mesh.rotation.y = this.time / 1000;
+
+		this.material.uniforms.time.value = this.time;
 	
 		this.renderer.render(this.scene, this.camera);
 		window.requestAnimationFrame(this.render.bind(this));
