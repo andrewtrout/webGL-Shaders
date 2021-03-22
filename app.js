@@ -1,4 +1,4 @@
-import { render } from 'sass';
+import '/style.scss';
 import * as THREE from 'three';
 
 export default class Sketch{
@@ -10,9 +10,12 @@ export default class Sketch{
 
 	render(){
 		this.time+= 0.05;
+		console.log(this.time)
 			window.requestAnimationFrame(this.render.bind(this));
 	}
 }
+
+new Sketch();
 
 
 // let camera, scene, renderer;
