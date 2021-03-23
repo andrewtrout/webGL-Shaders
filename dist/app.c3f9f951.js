@@ -36435,6 +36435,7 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
+// const gui = new dat.GUI();
 var Sketch = /*#__PURE__*/function () {
   function Sketch(options) {
     _classCallCheck(this, Sketch);
@@ -36474,7 +36475,7 @@ var Sketch = /*#__PURE__*/function () {
   }, {
     key: "addObjects",
     value: function addObjects() {
-      this.geometry = new THREE.PlaneBufferGeometry(4, 4, 100, 100); // this.material = new THREE.MeshNormalMaterial();
+      this.geometry = new THREE.PlaneBufferGeometry(4, 4, 100, 100); // this.material2 = new THREE.MeshNormalMaterial();
 
       this.material = new THREE.ShaderMaterial({
         uniforms: {
@@ -36487,15 +36488,21 @@ var Sketch = /*#__PURE__*/function () {
         vertexShader: _vertex.default // wireframe: true,
 
       });
-      this.mesh = new THREE.Mesh(this.geometry, this.material);
+      this.mesh = new THREE.Mesh(this.geometry, this.material); // this.mesh.position.set(0,0,0);
+      // this.mesh.rotation.set(0,0,0);
+
       this.scene.add(this.mesh);
+      this.mesh.rotation.x = -1.35; // gui.add(this.mesh.rotation, 'y').min(-1.5).max(1.5).step(0.01);
+      // gui.add(this.mesh.rotation, 'x').min(-1.5).max(1.5).step(0.01);
+      // gui.add(this.mesh.rotation, 'z').min(-90).max(90).step(0.01);
     }
   }, {
     key: "render",
     value: function render() {
-      this.time += 0.05;
-      this.mesh.rotation.x = this.time / 2000;
-      this.mesh.rotation.y = this.time / 1000;
+      this.time += 0.05; // this.mesh.rotation.x = this.time / 2000;
+      // this.mesh.rotation.y = this.time / 1000;
+      // this.mesh.rotation.x -= 0.001 * 2;
+
       this.material.uniforms.time.value = this.time;
       this.renderer.render(this.scene, this.camera);
       window.requestAnimationFrame(this.render.bind(this));
@@ -36537,7 +36544,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50214" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51267" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

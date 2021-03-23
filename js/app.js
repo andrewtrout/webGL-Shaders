@@ -1,8 +1,11 @@
 import '/style.scss';
 import * as THREE from 'three';
+// import * as dat from 'dat.gui';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js';
 import fragment from './shader/fragment.glsl';
 import vertex from './shader/vertex.glsl';
+
+// const gui = new dat.GUI();
 
 export default class Sketch{
 	constructor(options){
@@ -43,7 +46,9 @@ export default class Sketch{
 	addObjects(){
 
 		this.geometry = new THREE.PlaneBufferGeometry( 4, 4, 100, 100 );
-		// this.material = new THREE.MeshNormalMaterial();
+
+		// this.material2 = new THREE.MeshNormalMaterial();
+
 		this.material = new THREE.ShaderMaterial({
 			uniforms: {
 				time: {value:0}
@@ -55,13 +60,27 @@ export default class Sketch{
 		})
 	
 		this.mesh = new THREE.Mesh( this.geometry, this.material );
+		// this.mesh.position.set(0,0,0);
+		// this.mesh.rotation.set(0,0,0);
+
+		
 		this.scene.add( this.mesh );
+
+		this.mesh.rotation.x = -1.35;
+
+
+
+		// gui.add(this.mesh.rotation, 'y').min(-1.5).max(1.5).step(0.01);
+		// gui.add(this.mesh.rotation, 'x').min(-1.5).max(1.5).step(0.01);
+		// gui.add(this.mesh.rotation, 'z').min(-90).max(90).step(0.01);
 	}
 
 	render(){
 		this.time+= 0.05;
-		this.mesh.rotation.x = this.time / 2000;
-		this.mesh.rotation.y = this.time / 1000;
+		// this.mesh.rotation.x = this.time / 2000;
+		// this.mesh.rotation.y = this.time / 1000;
+
+		// this.mesh.rotation.x -= 0.001 * 2;
 
 		this.material.uniforms.time.value = this.time;
 	
