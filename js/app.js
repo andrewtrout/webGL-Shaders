@@ -66,7 +66,7 @@ export default class Sketch{
 		
 		this.scene.add( this.mesh );
 
-		this.mesh.rotation.x = -1.35;
+		this.mesh.rotation.x = -1.30;
 
 
 
