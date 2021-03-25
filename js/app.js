@@ -45,10 +45,10 @@ export default class Sketch{
 
 	addObjects(){
 
+		// this.geometrySphere = new THREE.SphereGeometry( 3, 132, 132 );
+
 		this.geometry = new THREE.PlaneBufferGeometry( 4, 4, 100, 100 );
-
 		// this.material2 = new THREE.MeshNormalMaterial();
-
 		this.material = new THREE.ShaderMaterial({
 			uniforms: {
 				time: {value:0}
@@ -60,10 +60,11 @@ export default class Sketch{
 		})
 	
 		this.mesh = new THREE.Mesh( this.geometry, this.material );
+		// this.mesh2 = new THREE.Mesh( this.geometrySphere, this.material );
 		// this.mesh.position.set(0,0,0);
 		// this.mesh.rotation.set(0,0,0);
 
-		
+		// this.scene.add( this.mesh2 );
 		this.scene.add( this.mesh );
 
 		this.mesh.rotation.x = -1.30;

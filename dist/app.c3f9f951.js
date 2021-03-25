@@ -36475,6 +36475,7 @@ var Sketch = /*#__PURE__*/function () {
   }, {
     key: "addObjects",
     value: function addObjects() {
+      // this.geometrySphere = new THREE.SphereGeometry( 3, 132, 132 );
       this.geometry = new THREE.PlaneBufferGeometry(4, 4, 100, 100); // this.material2 = new THREE.MeshNormalMaterial();
 
       this.material = new THREE.ShaderMaterial({
@@ -36488,11 +36489,13 @@ var Sketch = /*#__PURE__*/function () {
         vertexShader: _vertex.default // wireframe: true,
 
       });
-      this.mesh = new THREE.Mesh(this.geometry, this.material); // this.mesh.position.set(0,0,0);
+      this.mesh = new THREE.Mesh(this.geometry, this.material); // this.mesh2 = new THREE.Mesh( this.geometrySphere, this.material );
+      // this.mesh.position.set(0,0,0);
       // this.mesh.rotation.set(0,0,0);
+      // this.scene.add( this.mesh2 );
 
       this.scene.add(this.mesh);
-      this.mesh.rotation.x = -1.35; // gui.add(this.mesh.rotation, 'y').min(-1.5).max(1.5).step(0.01);
+      this.mesh.rotation.x = -1.30; // gui.add(this.mesh.rotation, 'y').min(-1.5).max(1.5).step(0.01);
       // gui.add(this.mesh.rotation, 'x').min(-1.5).max(1.5).step(0.01);
       // gui.add(this.mesh.rotation, 'z').min(-90).max(90).step(0.01);
     }
@@ -36544,7 +36547,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49822" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "49912" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
